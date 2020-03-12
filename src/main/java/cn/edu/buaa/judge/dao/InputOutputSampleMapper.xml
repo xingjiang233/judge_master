@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.buaa.judge.dao.InputOutputSampleMapper">
+
+    <resultMap id="InputOutputSampleResultMap" type="cn.edu.buaa.judge.bean.InputOutputSample">
+        <id property="problemId" column="problem_id"></id>
+        <result property="sampleNumber" column="sample_number"></result>
+        <result property="sampleInput" column="sample_input"></result>
+        <result property="sampleOutput" column="sample_output"></result>
+    </resultMap>
+
+    <select id="getInputOutputById" parameterType="long" resultMap="InputOutputSampleResultMap" useCache="true">
+        SELECT problem_id, sample_number, sample_input, sample_output
+        FROM input_output_samples WHERE problem_id = #{problemId};
+    </select>
+
+</mapper>

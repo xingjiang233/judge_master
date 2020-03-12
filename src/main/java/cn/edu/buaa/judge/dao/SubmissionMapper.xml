@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.buaa.judge.dao.SubmissionMapper">
+
+    <select id="getSubmissionById" parameterType="long" resultType="cn.edu.buaa.judge.bean.SimpleSubmission" useCache="true">
+        SELECT submission_id as submissionId, problem_id as problemId, language_id as  languageId, submit_code as submitCode
+        FROM submissions WHERE submission_id = #{submissionId};
+    </select>
+
+</mapper>
+
