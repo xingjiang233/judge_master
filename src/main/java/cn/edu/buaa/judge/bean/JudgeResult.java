@@ -33,10 +33,10 @@ public class JudgeResult {
      */
     private String judgeResult = "PD";
 
-    /** 编译输出是个啥？ 可以修改一下底层的C
-     * 编译输出
-     */
-    private String compileOutput;
+//    /** 编译输出是个啥？ 暂时不实现
+//     * 编译输出
+//     */
+//    private String compileOutput;
 
     public JudgeResult(long submissionId, Timestamp executeTime, Integer usedTime, Integer usedMemory, int judgeScore, String judgeResult, String compileOutput) {
         this.submissionId = submissionId;
@@ -45,7 +45,7 @@ public class JudgeResult {
         this.usedMemory = usedMemory;
         this.judgeScore = judgeScore;
         this.judgeResult = judgeResult;
-        this.compileOutput = compileOutput;
+        //this.compileOutput = compileOutput;
     }
 
     public JudgeResult() {
@@ -99,11 +99,4 @@ public class JudgeResult {
         this.judgeResult = judgeResult;
     }
 
-    public String getCompileOutput() {
-        return compileOutput;
-    }
-
-    public void setCompileOutput(String compileOutput) {
-        this.compileOutput = compileOutput;
-    }
 }
