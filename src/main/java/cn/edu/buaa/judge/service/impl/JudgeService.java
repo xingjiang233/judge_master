@@ -162,6 +162,7 @@ public class JudgeService {
             System.out.println("=====error====" + result.getSubmissionId() + ":" + exec.getError());
         } else {
             //将JSON字符串转化为StdOut对象
+            //针对评分问题，可以对judge.py文件进行一些修改
             StdOut out = JSON.parseObject(exec.getStdout(), StdOut.class);
             //log.info("=====stdout====" + out);
             System.out.println("=====stdout====" + out);

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
+import javax.jms.JMSException;
+
 @Service
 public class Consumer {
 
@@ -26,7 +28,7 @@ public class Consumer {
      * @Description 监听submission_queue 获取题目的ID,一旦发现有新的题目提交就去进行判题的操作
      */
     @JmsListener(destination = "submission_queue")
-    public void receiveMsg(String text) {
+    public void receiveMsg(String text) throws JMSException {
         System.out.println("submission_queue<<<<<<============ 收到判题ID： " + text);
         //业务逻辑 在这里进行判题，直接把结果给它送回去
         //获得JudgeTask
@@ -34,6 +36,7 @@ public class Consumer {
         // 调用Judge功能
         JudgeResult judgeResult = judgeService.judge(judgeTask);
         //返回judge结果
+        //String result = "暂时不实现";
         String result = JSON.toJSONString(judgeResult);
         System.out.println("题目ID—" + text + "的判题结果是：" + result);
         producer.sendMsg("judge_result_queue",result);

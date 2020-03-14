@@ -32,6 +32,7 @@ public class MessageController {
     @RequestMapping(value = "/SendMessageByQueue.do", method = RequestMethod.GET)
     public void send(String msg,String queue) {
         try {
+            //queue = submission_queue
             System.out.println("开始发出一次请求，时间是"+new Date());
             producer.sendMsg(queue,msg);
             System.out.println(msg+"请求发送完成，时间是"+new Date());

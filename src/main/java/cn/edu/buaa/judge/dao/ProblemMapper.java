@@ -1,5 +1,6 @@
 package cn.edu.buaa.judge.dao;
 
+
 import cn.edu.buaa.judge.bean.SimpleProblem;
 import org.springframework.stereotype.Repository;
 

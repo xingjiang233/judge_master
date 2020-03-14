@@ -1,6 +1,5 @@
 package cn.edu.buaa.judge.bean;
 
-import java.sql.Timestamp;
 
 public class SimpleSubmission {
     /**
