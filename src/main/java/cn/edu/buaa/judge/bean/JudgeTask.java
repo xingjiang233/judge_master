@@ -29,18 +29,18 @@ public class JudgeTask {
      */
     private String submitCode;
 
-    /**这个属性在Problem里面！！
+    /**
      * 题目运行最长时间限制，单位为毫秒
      */
     private int timeLimit;
 
-    /**这个属性在Problem里面！！
+    /**
      * 题目运行最大内存限制，单位为KB
      */
     private int memoryLimit;
 
-    /**这个属性在Problem里面！！并且需要从样例里面查询
-     * （这个能不能直接存在外面，或者可以来一个初始化，把数据库里面的测试样例都保存到文件里面！！）
+    /**
+     * （在命题时，将测试样例都保存到对应的文件夹中）
      * 题目输入输出样例数组
      */
     List<InputOutputSample> inputOutputSamples;

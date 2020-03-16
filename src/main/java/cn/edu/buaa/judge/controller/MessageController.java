@@ -16,8 +16,6 @@ public class MessageController {
     @Autowired
     //创建一个生产者，消费者在系统运行时已经创建
     private Producer producer;
-    //@Autowired
-    //private Consumer consumer;
 
     /**
      * 1、如果说Controller在你这写的话，那边需要集成HttpClient

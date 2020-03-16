@@ -24,17 +24,18 @@ import java.util.HashMap;
 @Service
 @Log4j
 public class JudgeService {
-//    RESULT_STR = [
-//            'Accepted',
-//            'Presentation Error',
-//            'Time Limit Exceeded',
-//            'Memory Limit Exceeded',
-//            'Wrong Answer',
-//            'Runtime Error',
-//            'Output Limit Exceeded',
-//            'Compile Error',
-//            'System Error'
-//            ]
+    /**
+     * RESULT_STR = [
+                'Accepted',
+                'Presentation Error',
+                'Time Limit Exceeded',
+                'Memory Limit Exceeded',
+                'Wrong Answer',
+                'Runtime Error',
+                'Output Limit Exceeded',
+                'Compile Error',
+                'System Error']
+     */
     private static HashMap<Integer,String> resultMap = new HashMap<>(){
         {
             put(0, "AC");
@@ -158,19 +159,21 @@ public class JudgeService {
         ExecMessage exec = ExecUtil.exec(cmd);
         if (exec.getError() != null) {
             result.setJudgeResult(resultMap.get(5));
-            //log.error("=====error====" + result.getSubmissionId() + ":" + exec.getError());
-            System.out.println("=====error====" + result.getSubmissionId() + ":" + exec.getError());
+            log.error("=====error====" + result.getSubmissionId() + ":" + exec.getError());
+            //System.out.println("=====error====" + result.getSubmissionId() + ":" + exec.getError());
         } else {
             //将JSON字符串转化为StdOut对象
-            //针对评分问题，可以对judge.py文件进行一些修改
             StdOut out = JSON.parseObject(exec.getStdout(), StdOut.class);
-            //log.info("=====stdout====" + out);
-            System.out.println("=====stdout====" + out);
+            log.info("=====stdout====" + out);
+            //System.out.println("=====stdout====" + out);
             result.setJudgeResult(resultMap.get(out.getStatus()));
+            //返回用例中最长的时间和空间
             result.setUsedTime(out.getMax_time().intValue());
             result.setUsedMemory(out.getMax_memory().intValue());
-            //这里先默认每道题都是10分，后面再沟通
-            result.setJudgeScore(10);
+            //默认每个用例10分，后面再沟通
+            result.setJudgeScore(out.getScore() * 10);
+            //一共多少个用例，通过了多少个用例
+            log.info("共有"+out.getSamples()+"个用例，通过了"+out.getScore()+"个用例。");
         }
     }
 

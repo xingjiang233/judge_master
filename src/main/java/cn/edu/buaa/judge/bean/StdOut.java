@@ -4,6 +4,10 @@ public class StdOut {
     private Integer status;
     private Long max_memory;
     private Long max_time;
+    //记录通过了多少用例
+    private Integer score;
+    //记录一共有多少个用例
+    private Integer samples;
 
     public StdOut() {
     }
@@ -36,5 +40,21 @@ public class StdOut {
 
     public void setMax_time(Long max_time) {
         this.max_time = max_time;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Integer getSamples() {
+        return samples;
+    }
+
+    public void setSamples(Integer samples) {
+        this.samples = samples;
     }
 }

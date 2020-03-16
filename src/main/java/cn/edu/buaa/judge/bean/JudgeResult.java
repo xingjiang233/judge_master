@@ -33,7 +33,7 @@ public class JudgeResult {
      */
     private String judgeResult = "PD";
 
-//    /** 编译输出是个啥？ 暂时不实现
+//    /**
 //     * 编译输出
 //     */
 //    private String compileOutput;
