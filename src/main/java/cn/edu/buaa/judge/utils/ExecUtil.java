@@ -18,6 +18,7 @@ public class ExecUtil {
         Runtime runtime = Runtime.getRuntime();
         Process exec = null;
         try {
+            //cmd = "python /home/lxy/OJ/judge.py python\" \"-m\" \"py_compile\" \"/home/lxy/OJ/workspace/7/Solution.py python\" \"/home/lxy/OJ/workspace/7/Solution.py /home/lxy/OJ/testdata/1 /home/lxy/OJ/workspace/7 1000 65536";
             exec = runtime.exec(cmd);
         } catch (IOException e) {
             e.printStackTrace();

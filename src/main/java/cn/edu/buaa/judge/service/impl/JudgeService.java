@@ -58,7 +58,7 @@ public class JudgeService {
     private static void createFile(int languageId, String path, String submitCode) throws Exception {
         String filename = "";
         /**
-         * '1': python, '2': C, '3': C++, '4': Java
+         * '1': python, '2': C, '3': C++, '4': Java, 5:命令执行文件 shell
          */
         switch (languageId) {
             case 1:
@@ -72,6 +72,9 @@ public class JudgeService {
                 break;
             case 4:
                 filename = "Solution.java";
+                break;
+            case 5:
+                filename = "Solution.sh";
                 break;
         }
 
@@ -96,7 +99,7 @@ public class JudgeService {
         String cmd = "";
         switch (languageId) {
             case 1:
-                cmd = "python -m py_compile " + path + "/Solution.py";
+                cmd = "python3 -m py_compile " + path + "/Solution.py";
                 break;
             case 2:
                 cmd = "gcc " + path + "/Solution.c -o " + path + "/Solution " ; //什么奇怪的版本参数？ + PropertiesUtil.StringValue("gccAddition");
@@ -123,7 +126,7 @@ public class JudgeService {
         String cmd = "";
         switch (languageId) {
             case 1:
-                cmd = "python " + path + "/Solution.py";
+                cmd = "python3 " + path + "/Solution.py";
                 break;
             case 2:
             case 3:
@@ -157,6 +160,7 @@ public class JudgeService {
      */
     private static void parseToResult(String cmd, JudgeResult result) {
         ExecMessage exec = ExecUtil.exec(cmd);
+        log.info("=====exec=====" + exec);
         if (exec.getError() != null) {
             result.setJudgeResult(resultMap.get(5));
             log.error("=====error====" + result.getSubmissionId() + ":" + exec.getError());
@@ -182,7 +186,7 @@ public class JudgeService {
      * @Param [task]
      * @Return cn.edu.buaa.judge.bean.JudgeResult
      */
-    public static JudgeResult judge(JudgeTask task) {
+    public static JudgeResult judge(JudgeTask task) throws Exception {
         JudgeResult result = new JudgeResult();
         //设置ID和执行时间
         result.setSubmissionId(task.getSubmissionId());
@@ -226,15 +230,19 @@ public class JudgeService {
             ExecUtil.exec("rm -rf " + path);
             return result;
         }
-        //给目录赋予权限
-        ExecUtil.exec("chmod -R 755 " + path);
 
         //judge
         String testdata = PropertiesUtil.StringValue("testdata") + "/" + task.getProblemId();
         //执行python命令，并传入参数
-        String cmd = "python " + PropertiesUtil.StringValue("judge_script") + " " + compile + " "
-                + process + " " + testdata + " " + path + " " + task.getTimeLimit() + " " + task.getMemoryLimit();
-        parseToResult(cmd, result);
+        String cmd = "python3 " + PropertiesUtil.StringValue("judge_script") + " '" + compile + "' '"
+                + process + "' " + testdata + " " + path + " " + task.getTimeLimit() + " " + task.getMemoryLimit();
+        //将命令保存到shell文件中再执行
+        createFile(5, path, cmd);
+        //给目录赋予权限
+        ExecUtil.exec("chmod -R 777 " + path);
+        //新的cmd命令
+        String newCmd = path + "/Solution.sh";
+        parseToResult(newCmd, result);
         //最终删除工作目录并退出
         ExecUtil.exec("rm -rf " + path);
         return result;

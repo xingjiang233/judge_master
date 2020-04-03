@@ -123,4 +123,17 @@ public class JudgeTask {
     public void setInputOutputSamples(List<InputOutputSample> inputOutputSamples) {
         this.inputOutputSamples = inputOutputSamples;
     }
+
+    @Override
+    public String toString() {
+        return "JudgeTask{" +
+                "submissionId=" + submissionId +
+                ", problemId=" + problemId +
+                ", languageId=" + languageId +
+                ", submitCode='" + submitCode + '\'' +
+                ", timeLimit=" + timeLimit +
+                ", memoryLimit=" + memoryLimit +
+                ", inputOutputSamples=" + inputOutputSamples +
+                '}';
+    }
 }

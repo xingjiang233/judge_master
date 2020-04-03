@@ -30,4 +30,12 @@ public class ExecMessage {
     public void setStdout(String stdout) {
         this.stdout = stdout;
     }
+
+    @Override
+    public String toString() {
+        return "ExecMessage{" +
+                "error='" + error + '\'' +
+                ", stdout='" + stdout + '\'' +
+                '}';
+    }
 }

@@ -57,4 +57,15 @@ public class StdOut {
     public void setSamples(Integer samples) {
         this.samples = samples;
     }
+
+    @Override
+    public String toString() {
+        return "StdOut{" +
+                "status=" + status +
+                ", max_memory=" + max_memory +
+                ", max_time=" + max_time +
+                ", score=" + score +
+                ", samples=" + samples +
+                '}';
+    }
 }

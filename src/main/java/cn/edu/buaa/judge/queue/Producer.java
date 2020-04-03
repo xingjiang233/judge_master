@@ -6,6 +6,8 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.jms.Destination;
+import javax.jms.Message;
+import java.util.Map;
 
 @Service
 public class Producer {
@@ -24,7 +26,19 @@ public class Producer {
      * @Param [destinationName, message]
      * @Return void
      */
-    public void sendMsg(String destinationName, String message) {
+    public void sendMsg(String destinationName, Long message) {
+        System.out.println(destinationName+"============>>>>> 发送queue消息 " + message);
+        Destination destination = new ActiveMQQueue(destinationName);
+        jmsMessagingTemplate.convertAndSend(destination, message);
+    }
+
+//    public void sendMsg(String destinationName, String message) {
+//        System.out.println(destinationName+"============>>>>> 发送queue消息 " + message);
+//        Destination destination = new ActiveMQQueue(destinationName);
+//        jmsMessagingTemplate.convertAndSend(destination, message);
+//    }
+//
+    public void sendMsg(String destinationName, Map<String,Object> message) {
         System.out.println(destinationName+"============>>>>> 发送queue消息 " + message);
         Destination destination = new ActiveMQQueue(destinationName);
         jmsMessagingTemplate.convertAndSend(destination, message);

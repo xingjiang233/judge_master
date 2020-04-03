@@ -15,10 +15,10 @@ public class Consumer2 {
      * @Date 2020/3/8 20:55
      * @Description 监听judge_result_queue获取判题结果
      */
-    @JmsListener(destination = "judge_result_queue")
-    public void receiveMsg(String text) {
-        System.out.println("judge_result_queue<<<<<<============ 收到消息： " + text);
-        //业务逻辑
-
-    }
+//    @JmsListener(destination = "judge_result_queue")
+//    public void receiveMsg(String text) {
+//        System.out.println("judge_result_queue<<<<<<============ 收到消息： " + text);
+//        //业务逻辑
+//
+//    }
 }

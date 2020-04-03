@@ -115,6 +115,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>cn.edu.buaa.judge.JudgeApplication</mainClass>
+                </configuration>
             </plugin>
 <!--            <plugin>-->
 <!--                <groupId>org.apache.maven.plugins</groupId>-->
@@ -126,12 +129,19 @@
 <!--            </plugin>-->
         </plugins>
         <resources>
-            <!-- IDEA-解决: org.apache.ibatis.binding.BindingException:Invalid bound statement (not found) -->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
     </build>

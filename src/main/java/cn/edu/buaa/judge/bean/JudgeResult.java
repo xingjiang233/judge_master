@@ -16,17 +16,17 @@ public class JudgeResult {
     /**
      * 代码执行耗时
      */
-    private Integer usedTime;
+    private Integer usedTime = 0;
 
     /**
      * 代码执行内存消耗
      */
-    private Integer usedMemory;
+    private Integer usedMemory = 0;
 
     /**
      * 评测得分
      */
-    private int judgeScore;
+    private int judgeScore = 0;
 
     /**
      * 评测结果，默认为"PD"(Pending)
@@ -99,4 +99,15 @@ public class JudgeResult {
         this.judgeResult = judgeResult;
     }
 
+    @Override
+    public String toString() {
+        return "JudgeResult{" +
+                "submissionId=" + submissionId +
+                ", executeTime=" + executeTime +
+                ", usedTime=" + usedTime +
+                ", usedMemory=" + usedMemory +
+                ", judgeScore=" + judgeScore +
+                ", judgeResult='" + judgeResult + '\'' +
+                '}';
+    }
 }
